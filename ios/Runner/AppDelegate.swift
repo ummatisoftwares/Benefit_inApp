@@ -27,17 +27,19 @@ import BenefitInAppSDK
             guard let args = call.arguments as? [String : Any] else {return}
             self.amount = args["amount"] as! String
             self.reference = args["reference"] as! String
+            
+            self.checkOut(result: result)
 
             
-            self.bpButton = BPInAppButton(frame: CGRect(x: 0, y: 0, width: 258, height: 60))
-
-            self.bpButton.delegate = self
-
-            if let window = UIApplication.shared.keyWindow {
-                window.addSubview(self.bpButton)
-            }
-            
-            self.bpButton.sendActions(for: .touchUpInside)
+//            self.bpButton = BPInAppButton(frame: CGRect(x: 0, y: 0, width: 258, height: 60))
+//
+//            self.bpButton.delegate = self
+//
+//            if let window = UIApplication.shared.keyWindow {
+//                window.addSubview(self.bpButton)
+//            }
+//
+//            self.bpButton.sendActions(for: .touchUpInside)
           default:
               result(FlutterMethodNotImplemented)
           }
