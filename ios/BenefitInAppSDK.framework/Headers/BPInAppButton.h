@@ -11,7 +11,7 @@
 
 @protocol BPInAppButtonDelegate;
 
-@interface BPInAppButton : UIButton
+@interface BPInAppButton : UIView
 
 
 @property (nonatomic, strong) IBOutlet id <BPInAppButtonDelegate> delegate;

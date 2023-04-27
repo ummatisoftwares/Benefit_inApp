@@ -37,7 +37,7 @@
             <string></string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.example.benefitTest</string>
+                <string>com.example.benefitTest:\\</string>
             </array>
         </dict>
     </array>

@@ -30,8 +30,6 @@ import BenefitInAppSDK
             
 //            self.checkOut(result: result)
             self.setupBpButton(result: result)
-
-//            self.bpButton.sendActions(for: .touchUpInside)
           default:
               result(FlutterMethodNotImplemented)
           }
@@ -42,14 +40,9 @@ import BenefitInAppSDK
   }
     
     func setupBpButton(result: @escaping FlutterResult) {
-//            bpButton = BPInAppButton(frame: CGRect(x: 0, y: 0, width: 120, height: 44))
-//            bpButton?.delegate = self
-//            // Customize the button if needed
-//            // ...
-//            window?.addSubview(bpButton!)
-//            result(true)
         
         bpButton = BPInAppButton()
+        
         if let rootViewController = window?.rootViewController {
             rootViewController.view.addSubview(bpButton)
             bpButton.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +55,7 @@ import BenefitInAppSDK
             bpButton.delegate = self
             
             //bpButton.sendActions(for: .touchUpInside)
-            
+                                                
             result("Success")
         }
     }
@@ -76,4 +69,21 @@ import BenefitInAppSDK
         result("Success")
         result(FlutterError(code: "Fail", message: "", details: nil))
     }
+    
+}
+
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    print("hamad")
+    print(options)
+    let item = BPDLPaymentCallBackItem(deepLinkURL: url)
+    print("Payment callback details:")
+    print("Status: \(item!.status)")
+    print("Merchant Name: \(item!.merchantName ?? "Hamad Merchant")")
+    print("Card Number: \(item!.cardNumber ?? "Hamad Card")")
+    print("Currency: \(item!.currency ?? "Hamad BHD")")
+    print("Currency Code: \(item!.currencyCode ?? "Hamad Code")")
+    print("Amount: \(item!.amount ?? "Hamad 0.1")")
+    print("Message: \(item!.message ?? "N/A")")
+    print("Reference ID: \(item!.referenceId ?? "Hamad Reference")")
+    return true
 }
