@@ -22,6 +22,25 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>benefitinapp</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>None</string>
+            <key>CFBundleURLName</key>
+            <string></string>
+            <key>CFBundleURLIconFile</key>
+            <string></string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.example.benefitTest</string>
+            </array>
+        </dict>
+    </array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

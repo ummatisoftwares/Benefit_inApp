@@ -9,7 +9,6 @@ import BenefitInAppSDK
     var reference = "9898977"
     
     var bpButton: BPInAppButton!
-
     
   override func application(
     _ application: UIApplication,
@@ -18,6 +17,7 @@ import BenefitInAppSDK
       
       let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
       let methodChannel = FlutterMethodChannel(name: "ummatisoftwares.benefitpay", binaryMessenger: controller.binaryMessenger)
+         
       
       methodChannel.setMethodCallHandler({
           (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
@@ -28,17 +28,9 @@ import BenefitInAppSDK
             self.amount = args["amount"] as! String
             self.reference = args["reference"] as! String
             
-            self.checkOut(result: result)
+//            self.checkOut(result: result)
+            self.setupBpButton(result: result)
 
-            
-//            self.bpButton = BPInAppButton(frame: CGRect(x: 0, y: 0, width: 258, height: 60))
-//
-//            self.bpButton.delegate = self
-//
-//            if let window = UIApplication.shared.keyWindow {
-//                window.addSubview(self.bpButton)
-//            }
-//
 //            self.bpButton.sendActions(for: .touchUpInside)
           default:
               result(FlutterMethodNotImplemented)
@@ -49,8 +41,34 @@ import BenefitInAppSDK
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
+    func setupBpButton(result: @escaping FlutterResult) {
+//            bpButton = BPInAppButton(frame: CGRect(x: 0, y: 0, width: 120, height: 44))
+//            bpButton?.delegate = self
+//            // Customize the button if needed
+//            // ...
+//            window?.addSubview(bpButton!)
+//            result(true)
+        
+        bpButton = BPInAppButton()
+        if let rootViewController = window?.rootViewController {
+            rootViewController.view.addSubview(bpButton)
+            bpButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                bpButton.centerXAnchor.constraint(equalTo: rootViewController.view.centerXAnchor),
+                bpButton.centerYAnchor.constraint(equalTo: rootViewController.view.centerYAnchor),
+                bpButton.widthAnchor.constraint(equalToConstant: 200),
+                bpButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+            bpButton.delegate = self
+            
+            //bpButton.sendActions(for: .touchUpInside)
+            
+            result("Success")
+        }
+    }
+    
     func bpInAppConfiguration() -> BPInAppConfiguration {
-        let configuration = BPInAppConfiguration(appId: "3253656030", andSecretKey: "4nt1zva9cb61ru59mbms5lole719b5a57a79fxpnt9ad9", andAmount: amount, andCurrencyCode: "048", andMerchantId: "004957102", andMerchantName: "DELIVER X", andMerchantCity: "Manama", andCountryCode: "BH", andMerchantCategoryId: "4215", andReferenceId: reference, andCallBackTag: "ummati.benefit")
+        let configuration = BPInAppConfiguration(appId: "3253656030", andSecretKey: "4nt1zva9cb61ru59mbms5lole719b5a57a79fxpnt9ad9", andAmount: amount, andCurrencyCode: "048", andMerchantId: "004957102", andMerchantName: "DELIVER X", andMerchantCity: "Manama", andCountryCode: "BH", andMerchantCategoryId: "4215", andReferenceId: reference, andCallBackTag: "com.example.benefitTest")
         return configuration!
     }
     
